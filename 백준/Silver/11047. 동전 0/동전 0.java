@@ -2,7 +2,7 @@ import java.io.*;
 import java.util.*;
 
 class Main{
-    public static int n, target, cnt, temp;
+    public static int n, target, cnt, temp, coin;
 
     public static void main(String[] args) throws IOException{
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -19,8 +19,10 @@ class Main{
 
         while (temp > -1) {
             if (target >= arr[temp]) {
-                target -= arr[temp];
-                cnt++;
+                coin = target / arr[temp];
+                target -= arr[temp] * coin;
+                cnt += coin;
+                temp--;
             } else {
                 temp--;
             }
