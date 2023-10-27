@@ -1,34 +1,45 @@
-import java.util.Arrays;
-import java.util.Scanner;
+import javax.print.attribute.standard.PresentationDirection;
+import java.io.*;
+import java.util.*;
 
-public class Main
-{
-	static int d[];
+class Main{
+    public static int n;
+    public static Integer[] dp;
 
-	public static void main(String[] args) throws Exception
-	{
-		Scanner sc = new Scanner(System.in);
+    public static void main(String[] args) throws IOException{
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        n = Integer.parseInt(br.readLine());
+        dp = new Integer[n+1];
+        if (n > 3) {
+            for (int i = 0; i <= 3; i++) {
 
-		int N = sc.nextInt();
-		
-		d = new int[N+1];
+                dp[i] = 1;
+            }
+            System.out.println(recur(n));
+        } else {
+            if(n == 1){
+                System.out.println(0);
+            } else{
+                System.out.println(1);
+            }
+            
+        }
+    }
 
-		d[1] = 0;
-		for (int i = 2; i < N+1; i++)
-		{
-			d[i] = d[i-1]+1;
-			if (i % 2 == 0 && d[i] > d[i/2]+1)
-			{
-				d[i] = d[i/2]+1;
-			}
-			if (i % 3 == 0 && d[i] > d[i/3]+1)
-			{
-				d[i] = d[i/3]+1;
-			}
-		}
-		System.out.println(d[N]);
-		
-		// N까지의 연산횟수 출력
-//		System.out.println(Arrays.toString(d));
-	}
+    public static int recur(int n) {
+        if (dp[n] == null) {
+            for (int i = 4; i <= n; i++) {
+                if (i % 6 == 0) {
+                    dp[i] = Math.min(dp[i / 2], dp[i / 3]) + 1;
+                } else if (i % 3 == 0) {
+                    dp[i] = Math.min(dp[i - 1], dp[i / 3]) + 1;
+                } else if (i % 2 == 0) {
+                    dp[i] = Math.min(dp[i - 1], dp[i / 2]) + 1;
+                } else {
+                    dp[i] = dp[i - 1] + 1;
+                }
+            }
+        }
+        return dp[n];
+    }
 }
