@@ -2,7 +2,8 @@ import java.io.*;
 import java.util.*;
 
 class Main{
-    public static int n,result;
+    public static int n;
+    public static long result;
     public static int[] city, mile;
     public static String[] str;
 
@@ -21,8 +22,8 @@ class Main{
         }
 
 
-        int oil = city[0];
-        int temp = mile[0];
+        long oil = city[0];
+        long temp = mile[0];
         result = 0;
 
         for (int i = 1; i < n-1; i++) {
