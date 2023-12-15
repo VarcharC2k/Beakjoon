@@ -10,7 +10,12 @@ class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         n = Integer.parseInt(br.readLine());
-        PriorityQueue<Integer> d = new PriorityQueue<>(Collections.reverseOrder());
+        PriorityQueue<Integer> d = new PriorityQueue<>(new Comparator<Integer>() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                return o2-o1;
+            }
+        });
         sb = new StringBuilder();
 
         for (int i = 0; i < n; i++) {
